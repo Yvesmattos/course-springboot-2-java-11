@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mattos.course.entities.pk.OrderItemPK;
 
-
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
@@ -19,9 +18,9 @@ public class OrderItem implements Serializable {
 	private OrderItemPK id = new OrderItemPK();
 	private Integer quantity;
 	private Double price;
-	
+
 	public OrderItem() {
-		
+
 	}
 
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
@@ -35,20 +34,20 @@ public class OrderItem implements Serializable {
 	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
-	}  
-	
+	}
+
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
-	
+
 	public Product getProduct() {
 		return id.getProduct();
 	}
-	
+
 	public void setProduct(Product product) {
 		id.setProduct(product);
 	}
-	
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -65,6 +64,10 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 
+	public Double getSubTotal() {
+		return price * quantity;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,7 +76,6 @@ public class OrderItem implements Serializable {
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -90,6 +92,5 @@ public class OrderItem implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }
